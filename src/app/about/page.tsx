@@ -12,7 +12,6 @@ import {
   Linkedin,
   Twitter
 } from 'lucide-react';
-import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 
 export default function AboutPage() {

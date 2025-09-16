@@ -4,20 +4,16 @@ import { useState } from 'react';
 import { useParams } from 'next/navigation';
 import { 
   Star, 
-  Users, 
   BookOpen, 
   MapPin, 
   Mail, 
   Phone, 
-  Calendar,
   Award,
   FileText,
-  TrendingUp,
   ArrowLeft,
   ExternalLink
 } from 'lucide-react';
 import { realMentors, realReviews } from '@/data/realData';
-import { Mentor, Review } from '@/types';
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 
@@ -163,7 +159,7 @@ export default function MentorDetailPage() {
                 return (
                   <button
                     key={tab.id}
-                    onClick={() => setActiveTab(tab.id as any)}
+                    onClick={() => setActiveTab(tab.id as 'overview' | 'projects' | 'publications' | 'reviews')}
                     className={`flex items-center py-4 px-1 border-b-2 font-medium text-sm ${
                       activeTab === tab.id
                         ? 'border-indigo-500 text-indigo-600'

@@ -1,10 +1,9 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { Search, Filter, Star, Users, BookOpen, MapPin, Mail, Phone } from 'lucide-react';
-import { realMentors, realResearchFields, realDepartments, realTitles } from '@/data/realData';
-import { Mentor, SearchFilters as SearchFiltersType } from '@/types';
-import Link from 'next/link';
+import { BookOpen } from 'lucide-react';
+import { realMentors } from '@/data/realData';
+import { SearchFilters as SearchFiltersType } from '@/types';
 import Navigation from '@/components/Navigation';
 import MentorCard from '@/components/MentorCard';
 import SearchFilters from '@/components/SearchFilters';
@@ -21,11 +20,10 @@ export default function MentorsPage() {
     sortOrder: 'desc'
   });
 
-  const [showFilters, setShowFilters] = useState(false);
 
   // 筛选和搜索逻辑
   const filteredMentors = useMemo(() => {
-    let filtered = realMentors.filter(mentor => {
+    const filtered = realMentors.filter(mentor => {
       // 关键词搜索
       if (searchFilters.keyword) {
         const keyword = searchFilters.keyword.toLowerCase();
@@ -104,7 +102,7 @@ export default function MentorsPage() {
     return filtered;
   }, [searchFilters]);
 
-  const handleFilterChange = (key: keyof SearchFiltersType, value: any) => {
+  const handleFilterChange = (key: keyof SearchFiltersType, value: unknown) => {
     setSearchFilters(prev => ({
       ...prev,
       [key]: value

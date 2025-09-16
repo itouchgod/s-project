@@ -14,7 +14,7 @@ interface SearchFiltersProps {
 export default function SearchFilters({ filters, onFiltersChange, onClearFilters }: SearchFiltersProps) {
   const [showFilters, setShowFilters] = useState(false);
 
-  const handleFilterChange = (key: keyof SearchFiltersType, value: any) => {
+  const handleFilterChange = (key: keyof SearchFiltersType, value: unknown) => {
     onFiltersChange({
       ...filters,
       [key]: value

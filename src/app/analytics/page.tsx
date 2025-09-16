@@ -2,22 +2,16 @@
 
 import { useState } from 'react';
 import { 
-  BarChart3, 
-  TrendingUp, 
   Users, 
   Star, 
   BookOpen, 
-  PieChart,
-  Activity,
-  Award,
-  Calendar
+  Activity
 } from 'lucide-react';
 import { realStatistics, realMentors } from '@/data/realData';
-import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 
 // 简单的图表组件（实际项目中可以使用 Recharts）
-const BarChart = ({ data, title, color = 'indigo' }: { data: any[], title: string, color?: string }) => {
+const BarChart = ({ data, title, color = 'indigo' }: { data: { field: string; count: number }[], title: string, color?: string }) => {
   const maxValue = Math.max(...data.map(d => d.count));
   
   return (
@@ -43,7 +37,7 @@ const BarChart = ({ data, title, color = 'indigo' }: { data: any[], title: strin
   );
 };
 
-const LineChart = ({ data, title }: { data: any[], title: string }) => {
+const LineChart = ({ data, title }: { data: { month: string; mentors: number; students: number; matches: number }[], title: string }) => {
   const maxValue = Math.max(...data.map(d => Math.max(d.mentors, d.students, d.matches)));
   
   return (
@@ -151,7 +145,7 @@ export default function AnalyticsPage() {
               ].map((period) => (
                 <button
                   key={period.value}
-                  onClick={() => setSelectedPeriod(period.value as any)}
+                  onClick={() => setSelectedPeriod(period.value as '6months' | '1year' | 'all')}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                     selectedPeriod === period.value
                       ? 'bg-indigo-600 text-white'

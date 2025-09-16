@@ -95,7 +95,7 @@ export function generateId(length: number = 8): string {
  * @param wait - 等待时间（毫秒）
  * @returns 防抖后的函数
  */
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: unknown[]) => unknown>(
   func: T,
   wait: number
 ): (...args: Parameters<T>) => void {
@@ -112,7 +112,7 @@ export function debounce<T extends (...args: any[]) => any>(
  * @param limit - 时间限制（毫秒）
  * @returns 节流后的函数
  */
-export function throttle<T extends (...args: any[]) => any>(
+export function throttle<T extends (...args: unknown[]) => unknown>(
   func: T,
   limit: number
 ): (...args: Parameters<T>) => void {
@@ -133,16 +133,16 @@ export function throttle<T extends (...args: any[]) => any>(
  */
 export function deepClone<T>(obj: T): T {
   if (obj === null || typeof obj !== 'object') return obj;
-  if (obj instanceof Date) return new Date(obj.getTime()) as any;
-  if (obj instanceof Array) return obj.map(item => deepClone(item)) as any;
+  if (obj instanceof Date) return new Date(obj.getTime()) as T;
+  if (obj instanceof Array) return obj.map(item => deepClone(item)) as T;
   if (typeof obj === 'object') {
-    const clonedObj = {} as any;
+    const clonedObj = {} as Record<string, unknown>;
     for (const key in obj) {
       if (obj.hasOwnProperty(key)) {
-        clonedObj[key] = deepClone(obj[key]);
+        clonedObj[key] = deepClone((obj as Record<string, unknown>)[key]);
       }
     }
-    return clonedObj;
+    return clonedObj as T;
   }
   return obj;
 }
@@ -154,8 +154,8 @@ export function deepClone<T>(obj: T): T {
  * @returns 匹配分数 (0-100)
  */
 export function calculateMatchScore(
-  mentor: any,
-  preferences: any
+  mentor: { researchFields: string[]; tags?: string[]; rating: number; isAvailable: boolean },
+  preferences: { researchFields?: string[]; teachingStyle?: string[]; minRating?: number }
 ): number {
   let score = 0;
   let totalWeight = 0;
@@ -163,7 +163,7 @@ export function calculateMatchScore(
   // 研究方向匹配 (权重: 40%)
   if (preferences.researchFields && preferences.researchFields.length > 0) {
     const fieldMatch = mentor.researchFields.some((field: string) =>
-      preferences.researchFields.includes(field)
+      preferences.researchFields!.includes(field)
     );
     score += fieldMatch ? 40 : 0;
     totalWeight += 40;
@@ -172,7 +172,7 @@ export function calculateMatchScore(
   // 教学风格匹配 (权重: 25%)
   if (preferences.teachingStyle && preferences.teachingStyle.length > 0) {
     const styleMatch = preferences.teachingStyle.some((style: string) =>
-      mentor.tags?.includes(style)
+      mentor.tags?.includes(style) || false
     );
     score += styleMatch ? 25 : 0;
     totalWeight += 25;
