@@ -380,6 +380,310 @@ export const realMentors: Mentor[] = [
     tags: ['形式化验证', '数学基础', '类型论', '严谨学术'],
     createdAt: new Date('2020-01-01'),
     updatedAt: new Date('2024-01-01')
+  },
+  {
+    id: '7',
+    name: 'Praminda Caleb-Solly',
+    title: '教授',
+    department: '人机交互学院',
+    researchFields: ['人机交互', '社交机器人', '错误修复', '多模态交互', '辅助机器人', '计算机视觉', '安全分析', '风险评估', '康复', '生物反馈'],
+    email: 'praminda.caleb-solly@university.edu.cn',
+    office: '人机交互实验室E101',
+    description: '人机交互专家，专注于社交机器人和辅助机器人研究，在康复技术和多模态交互方面有丰富经验。',
+    education: [
+      {
+        id: '7',
+        degree: '博士',
+        school: '知名大学',
+        major: '人机交互',
+        year: 2009,
+        isHighest: true
+      }
+    ],
+    experience: [],
+    publications: [],
+    projects: [
+      {
+        id: '18',
+        title: 'Human–Robot Interaction Repair Strategies',
+        funding: '内部项目',
+        amount: 0,
+        startDate: new Date('2024-01-01'),
+        endDate: new Date('2024-12-31'),
+        role: 'principal',
+        description: '使用Temi机器人设计并评估会话修复策略，提升用户信任与安全感',
+        status: 'ongoing'
+      },
+      {
+        id: '19',
+        title: 'Multi-modal HRI for Assistive Tasks',
+        funding: '内部项目',
+        amount: 0,
+        startDate: new Date('2024-01-01'),
+        endDate: new Date('2024-12-31'),
+        role: 'principal',
+        description: '结合语音与手势识别，开发辅助机器人执行抓取放置任务',
+        status: 'ongoing'
+      },
+      {
+        id: '20',
+        title: 'Safety & Risk Analysis for Mobile Assistive Robots',
+        funding: '内部项目',
+        amount: 0,
+        startDate: new Date('2024-01-01'),
+        endDate: new Date('2024-12-31'),
+        role: 'principal',
+        description: '针对家庭使用的移动辅助机器人开展安全与风险分析',
+        status: 'ongoing'
+      },
+      {
+        id: '21',
+        title: 'Socio-interactive Rehabilitation Robot with Biofeedback',
+        funding: '内部项目',
+        amount: 0,
+        startDate: new Date('2024-01-01'),
+        endDate: new Date('2024-12-31'),
+        role: 'principal',
+        description: '研究使用多模态传感与反馈机制支持康复训练',
+        status: 'ongoing'
+      }
+    ],
+    awards: [],
+    rating: 4.3,
+    reviewCount: 8,
+    studentCount: 4,
+    isAvailable: true,
+    tags: ['人机交互', '康复技术', '社交机器人', '多模态'],
+    createdAt: new Date('2020-01-01'),
+    updatedAt: new Date('2024-01-01')
+  },
+  {
+    id: '8',
+    name: 'Alfie Cameron',
+    title: '教授',
+    department: '计算机科学与技术学院',
+    researchFields: ['类型论', 'Coq', 'Agda', '形式化验证', '量子计算', '可视化', '游戏', '数学游戏', '博弈论', '人工智能'],
+    email: 'alfie.cameron@university.edu.cn',
+    office: '形式化方法实验室A402',
+    description: '类型论和量子计算专家，专注于形式化验证和量子计算接口设计，在数学游戏和AI应用方面有独特研究。',
+    education: [
+      {
+        id: '8',
+        degree: '博士',
+        school: '知名大学',
+        major: '计算机科学',
+        year: 2011,
+        isHighest: true
+      }
+    ],
+    experience: [],
+    publications: [],
+    projects: [
+      {
+        id: '22',
+        title: 'Programming and Proving in Type Theory',
+        funding: '内部项目',
+        amount: 0,
+        startDate: new Date('2024-01-01'),
+        endDate: new Date('2024-12-31'),
+        role: 'principal',
+        description: '使用依赖类型语言/证明助理实现算法并证明其正确性，可涉及红黑树、图算法、堆、流网络等',
+        status: 'ongoing'
+      },
+      {
+        id: '23',
+        title: 'Quantum Computing Interfaces',
+        funding: '内部项目',
+        amount: 0,
+        startDate: new Date('2024-01-01'),
+        endDate: new Date('2024-12-31'),
+        role: 'principal',
+        description: '开发量子电路绘制工具或量子游戏，探索量子叠加态交互',
+        status: 'ongoing'
+      },
+      {
+        id: '24',
+        title: 'Mathematical Games with AI',
+        funding: '内部项目',
+        amount: 0,
+        startDate: new Date('2024-01-01'),
+        endDate: new Date('2024-12-31'),
+        role: 'principal',
+        description: '实现带有图形界面和AI对手的棋类游戏，带有新颖元素并映射实际应用',
+        status: 'ongoing'
+      }
+    ],
+    awards: [],
+    rating: 4.6,
+    reviewCount: 12,
+    studentCount: 6,
+    isAvailable: true,
+    tags: ['类型论', '量子计算', '形式化验证', '数学游戏'],
+    createdAt: new Date('2020-01-01'),
+    updatedAt: new Date('2024-01-01')
+  },
+  {
+    id: '9',
+    name: 'Xavier Carpent',
+    title: '教授',
+    department: '网络空间安全学院',
+    researchFields: ['密码学', '彩虹表', '优化', '加密电路', '编译器', '多方计算', '数据结构', '优先队列', '性能分析', '布隆过滤器', '近似查询', '隐私保护', '集合查询', '数据可视化', '密码安全', '数据分析'],
+    email: 'xavier.carpent@university.edu.cn',
+    office: '密码学实验室B301',
+    description: '密码学专家，专注于密码分析、加密电路和数据结构研究，在密码安全和隐私保护方面有丰富经验。',
+    education: [
+      {
+        id: '9',
+        degree: '博士',
+        school: '知名大学',
+        major: '密码学',
+        year: 2007,
+        isHighest: true
+      }
+    ],
+    experience: [],
+    publications: [],
+    projects: [
+      {
+        id: '25',
+        title: 'Advances in Cryptanalytic Time-Memory Trade-Offs',
+        funding: '内部项目',
+        amount: 0,
+        startDate: new Date('2024-01-01'),
+        endDate: new Date('2024-12-31'),
+        role: 'principal',
+        description: '研究彩虹表的改进方法，优化函数选择、参数设定等，提高破解效率',
+        status: 'ongoing'
+      },
+      {
+        id: '26',
+        title: 'Advances in Garbled Circuits',
+        funding: '内部项目',
+        amount: 0,
+        startDate: new Date('2024-01-01'),
+        endDate: new Date('2024-12-31'),
+        role: 'principal',
+        description: '构建高效GC编译器，探索非二元电路，提高多方安全计算效率',
+        status: 'ongoing'
+      },
+      {
+        id: '27',
+        title: 'n-Dimensional Beaps',
+        funding: '内部项目',
+        amount: 0,
+        startDate: new Date('2024-01-01'),
+        endDate: new Date('2024-12-31'),
+        role: 'principal',
+        description: '分析和实现多维Beap结构，并与堆结构进行比较',
+        status: 'ongoing'
+      },
+      {
+        id: '28',
+        title: 'Convex Bloom Filters',
+        funding: '内部项目',
+        amount: 0,
+        startDate: new Date('2024-01-01'),
+        endDate: new Date('2024-12-31'),
+        role: 'principal',
+        description: '实现布隆过滤器变体并验证理论性能，探索数学与优化结合',
+        status: 'ongoing'
+      },
+      {
+        id: '29',
+        title: 'Private Set Membership Scheme',
+        funding: '内部项目',
+        amount: 0,
+        startDate: new Date('2024-01-01'),
+        endDate: new Date('2024-12-31'),
+        role: 'principal',
+        description: '实现可组合的私有集合成员协议，并评估效率',
+        status: 'ongoing'
+      },
+      {
+        id: '30',
+        title: 'Leaked Passwords Dashboard',
+        funding: '内部项目',
+        amount: 0,
+        startDate: new Date('2024-01-01'),
+        endDate: new Date('2024-12-31'),
+        role: 'principal',
+        description: '开发可视化仪表盘，展示不同密码泄露存储方式与安全统计',
+        status: 'ongoing'
+      },
+      {
+        id: '31',
+        title: 'Password Cracking Exploration',
+        funding: '内部项目',
+        amount: 0,
+        startDate: new Date('2024-01-01'),
+        endDate: new Date('2024-12-31'),
+        role: 'principal',
+        description: '探索不同的密码破解技术',
+        status: 'ongoing'
+      }
+    ],
+    awards: [],
+    rating: 4.4,
+    reviewCount: 16,
+    studentCount: 9,
+    isAvailable: true,
+    tags: ['密码学', '数据结构', '隐私保护', '安全分析'],
+    createdAt: new Date('2020-01-01'),
+    updatedAt: new Date('2024-01-01')
+  },
+  {
+    id: '10',
+    name: 'Chao Chen',
+    title: '教授',
+    department: '人工智能学院',
+    researchFields: ['模糊系统', '深度学习', '可解释AI', '可解释性', '指标', '评估体系'],
+    email: 'chao.chen@university.edu.cn',
+    office: 'AI实验室C303',
+    description: '深度学习与模糊系统专家，专注于可解释AI和模型可解释性评估，在模糊逻辑与深度学习融合方面有深入研究。',
+    education: [
+      {
+        id: '10',
+        degree: '博士',
+        school: '知名大学',
+        major: '人工智能',
+        year: 2013,
+        isHighest: true
+      }
+    ],
+    experience: [],
+    publications: [],
+    projects: [
+      {
+        id: '32',
+        title: 'Deep Learning + Fuzzy Systems Integration',
+        funding: '内部项目',
+        amount: 0,
+        startDate: new Date('2024-01-01'),
+        endDate: new Date('2024-12-31'),
+        role: 'principal',
+        description: '融合深度学习与模糊逻辑，开发兼具性能与可解释性的AI模型',
+        status: 'ongoing'
+      },
+      {
+        id: '33',
+        title: 'Metrics for Interpretability & Explainability',
+        funding: '内部项目',
+        amount: 0,
+        startDate: new Date('2024-01-01'),
+        endDate: new Date('2024-12-31'),
+        role: 'principal',
+        description: '探索新的评估指标，用于量化模型的可解释性和可说明性',
+        status: 'ongoing'
+      }
+    ],
+    awards: [],
+    rating: 4.5,
+    reviewCount: 11,
+    studentCount: 5,
+    isAvailable: true,
+    tags: ['可解释AI', '模糊系统', '深度学习', '模型评估'],
+    createdAt: new Date('2020-01-01'),
+    updatedAt: new Date('2024-01-01')
   }
 ];
 
@@ -437,7 +741,7 @@ export const realReviews: Review[] = [
 
 // 基于真实数据的统计信息
 export const realStatistics: Statistics = {
-  totalMentors: 184, // 基于文档中的导师数量
+  totalMentors: 10, // 当前已添加的导师数量
   totalStudents: 2500,
   totalReviews: 1200,
   averageRating: 4.6,

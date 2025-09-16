@@ -13,8 +13,11 @@ export default function Navigation({ className = '' }: NavigationProps) {
 
   const navItems = [
     { href: '/', label: '首页' },
+    { href: '/projects', label: '项目列表' },
     { href: '/mentors', label: '导师列表' },
+    { href: '/compare', label: '对比' },
     { href: '/analytics', label: '数据分析' },
+    { href: '/settings', label: '设置' },
     { href: '/about', label: '关于我们' }
   ];
 
