@@ -1,28 +1,13 @@
 import { Search, Filter, BarChart3, Users, Star, BookOpen } from 'lucide-react';
 import { realMentors, realStatistics, realResearchFields } from '@/data/realData';
+import Navigation from '@/components/Navigation';
+import MentorCard from '@/components/MentorCard';
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       {/* 导航栏 */}
-      <nav className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <BookOpen className="h-8 w-8 text-indigo-600" />
-              <span className="ml-2 text-xl font-bold text-gray-900">导师选择分析平台</span>
-            </div>
-            <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-4">
-                <a href="#" className="text-gray-900 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">首页</a>
-                <a href="#" className="text-gray-500 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">导师列表</a>
-                <a href="#" className="text-gray-500 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">数据分析</a>
-                <a href="#" className="text-gray-500 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">关于我们</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navigation />
 
       {/* 主要内容区域 */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -123,37 +108,7 @@ export default function Home() {
           <h2 className="text-2xl font-bold text-gray-900 mb-8">热门导师推荐</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {realMentors.slice(0, 6).map((mentor) => (
-              <div key={mentor.id} className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center">
-                    <span className="text-indigo-600 font-semibold">{mentor.name.charAt(0)}</span>
-                  </div>
-                  <div className="ml-3">
-                    <h3 className="font-semibold text-gray-900">{mentor.name}</h3>
-                    <p className="text-sm text-gray-600">{mentor.department}</p>
-                  </div>
-                </div>
-                <p className="text-gray-600 text-sm mb-4">
-                  {mentor.description}
-                </p>
-                <div className="flex flex-wrap gap-1 mb-4">
-                  {mentor.researchFields.slice(0, 3).map((field, index) => (
-                    <span key={index} className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
-                      {field}
-                    </span>
-                  ))}
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                    <span className="ml-1 text-sm text-gray-600">{mentor.rating}</span>
-                    <span className="ml-2 text-xs text-gray-500">({mentor.reviewCount}评价)</span>
-                  </div>
-                  <button className="text-indigo-600 hover:text-indigo-700 text-sm font-medium">
-                    查看详情 →
-                  </button>
-                </div>
-              </div>
+              <MentorCard key={mentor.id} mentor={mentor} />
             ))}
           </div>
         </div>
