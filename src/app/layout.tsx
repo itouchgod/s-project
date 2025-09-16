@@ -12,11 +12,10 @@ export const metadata: Metadata = {
   description: "为大学生提供最专业的导师选择建议，基于数据分析和智能匹配，让学术之路更加清晰明确。",
   keywords: ["导师选择", "数据分析", "智能匹配", "学术指导", "大学导师"],
   authors: [{ name: "导师选择分析平台团队" }],
-};
-
-export const viewport = {
-  width: 'device-width',
-  initialScale: 1,
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+  },
 };
 
 export default function RootLayout({
