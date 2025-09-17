@@ -6,7 +6,13 @@ import {
   Lightbulb, 
   Shield, 
   Heart,
-  Mail
+  Mail,
+  CheckCircle,
+  AlertCircle,
+  Star,
+  TrendingUp,
+  Clock,
+  Award
 } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 
@@ -14,9 +20,9 @@ export default function AboutPage() {
   return (
     <>
       <Head>
-        <title>关于我们 - 大学导师选择分析平台</title>
-        <meta name="description" content="了解我们的使命、团队和平台特色，为大学生提供最专业的导师选择服务" />
-        <meta name="keywords" content="关于我们,导师选择,学术研究,平台介绍" />
+        <title>学生建议 - 大学导师选择分析平台</title>
+        <meta name="description" content="指导学生如何选择项目和导师，提供专业的学术发展建议" />
+        <meta name="keywords" content="学生建议,导师选择,项目选择,学术发展,指导" />
       </Head>
       <div className="min-h-screen bg-gray-50">
       {/* 导航栏 */}
@@ -25,206 +31,242 @@ export default function AboutPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* 页面标题 */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold text-gray-900 mb-6">关于我们</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-6">学生选择建议</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            我们致力于为大学生提供最专业、最智能的导师选择服务，让学术之路更加清晰明确。
+            专业的指导建议，帮助您做出明智的导师和项目选择，开启成功的学术之路。
           </p>
         </div>
 
-        {/* 我们的使命 */}
+        {/* 选择导师的建议 */}
         <div className="bg-white rounded-xl shadow-lg p-8 mb-16">
           <div className="text-center mb-8">
-            <Target className="h-12 w-12 text-indigo-600 mx-auto mb-4" />
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">我们的使命</h2>
+            <Users className="h-12 w-12 text-indigo-600 mx-auto mb-4" />
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">如何选择导师</h2>
           </div>
           <div className="max-w-4xl mx-auto">
-            <p className="text-lg text-gray-600 leading-relaxed mb-6">
-              在当今快速发展的学术环境中，选择合适的导师对学生的学术成长和职业发展至关重要。
-              我们相信，通过数据驱动的智能匹配和全面的导师信息展示，可以帮助学生做出更明智的选择。
-            </p>
-            <p className="text-lg text-gray-600 leading-relaxed">
-              我们的平台整合了多位优秀导师的详细信息，涵盖人工智能、VR技术、网络安全、
-              软件工程等多个前沿领域，为学生提供最全面的导师选择参考。
-            </p>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="space-y-6">
+                <div className="flex items-start">
+                  <CheckCircle className="h-6 w-6 text-green-500 mr-3 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">研究兴趣匹配</h3>
+                    <p className="text-gray-600">选择与您研究兴趣高度一致的导师，确保研究方向的专业性和持续性。</p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <CheckCircle className="h-6 w-6 text-green-500 mr-3 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">导师经验与声誉</h3>
+                    <p className="text-gray-600">关注导师的学术背景、发表论文数量、获奖情况以及学生评价。</p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <CheckCircle className="h-6 w-6 text-green-500 mr-3 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">指导风格</h3>
+                    <p className="text-gray-600">了解导师的指导方式，选择适合您学习风格的导师。</p>
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-6">
+                <div className="flex items-start">
+                  <CheckCircle className="h-6 w-6 text-green-500 mr-3 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">可用性与时间</h3>
+                    <p className="text-gray-600">确认导师是否有足够时间指导您，避免选择过于忙碌的导师。</p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <CheckCircle className="h-6 w-6 text-green-500 mr-3 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">实验室资源</h3>
+                    <p className="text-gray-600">了解导师实验室的设备、资金和团队情况，确保研究条件充足。</p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <CheckCircle className="h-6 w-6 text-green-500 mr-3 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">职业发展支持</h3>
+                    <p className="text-gray-600">选择能够为您的职业发展提供指导和帮助的导师。</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* 核心价值 */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
-          <div className="bg-white rounded-xl p-8 shadow-lg text-center">
-            <Lightbulb className="h-12 w-12 text-yellow-500 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">创新驱动</h3>
-            <p className="text-gray-600">
-              运用先进的数据分析和机器学习技术，为学生提供个性化的导师推荐服务。
-            </p>
-          </div>
-
-          <div className="bg-white rounded-xl p-8 shadow-lg text-center">
-            <Shield className="h-12 w-12 text-green-500 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">数据透明</h3>
-            <p className="text-gray-600">
-              提供真实、全面的导师信息，包括研究项目、学术成果、学生评价等详细数据。
-            </p>
-          </div>
-
-          <div className="bg-white rounded-xl p-8 shadow-lg text-center">
-            <Heart className="h-12 w-12 text-red-500 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">用户至上</h3>
-            <p className="text-gray-600">
-              以学生需求为中心，持续优化用户体验，提供最便捷、最有效的服务。
-            </p>
-          </div>
-        </div>
-
-        {/* 平台特色 */}
+        {/* 选择项目的建议 */}
         <div className="bg-white rounded-xl shadow-lg p-8 mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">平台特色</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="space-y-6">
-              <div className="flex items-start">
-                <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center mr-4 mt-1">
-                  <span className="text-indigo-600 font-bold">1</span>
+          <div className="text-center mb-8">
+            <BookOpen className="h-12 w-12 text-indigo-600 mx-auto mb-4" />
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">如何选择项目</h2>
+          </div>
+          <div className="max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="space-y-6">
+                <div className="flex items-start">
+                  <Star className="h-6 w-6 text-yellow-500 mr-3 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">项目难度评估</h3>
+                    <p className="text-gray-600">根据自身能力选择合适难度的项目，避免过于简单或过于困难。</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">智能匹配算法</h3>
-                  <p className="text-gray-600">
-                    基于学生的兴趣、学术背景和研究方向，智能推荐最适合的导师。
-                  </p>
+                <div className="flex items-start">
+                  <Star className="h-6 w-6 text-yellow-500 mr-3 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">学习价值</h3>
+                    <p className="text-gray-600">选择能够提升技能、扩展知识面的项目，确保学习效果。</p>
+                  </div>
                 </div>
-              </div>
-
-              <div className="flex items-start">
-                <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center mr-4 mt-1">
-                  <span className="text-indigo-600 font-bold">2</span>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">全面数据分析</h3>
-                  <p className="text-gray-600">
-                    提供详细的导师数据分析和对比，包括研究方向、学术成果、学生评价等维度。
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start">
-                <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center mr-4 mt-1">
-                  <span className="text-indigo-600 font-bold">3</span>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">实时搜索筛选</h3>
-                  <p className="text-gray-600">
-                    支持多维度搜索和筛选功能，快速找到符合要求的导师。
-                  </p>
+                <div className="flex items-start">
+                  <Star className="h-6 w-6 text-yellow-500 mr-3 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">时间安排</h3>
+                    <p className="text-gray-600">考虑项目周期与个人时间安排，确保能够按时完成。</p>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <div className="space-y-6">
-              <div className="flex items-start">
-                <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center mr-4 mt-1">
-                  <span className="text-indigo-600 font-bold">4</span>
+              <div className="space-y-6">
+                <div className="flex items-start">
+                  <Star className="h-6 w-6 text-yellow-500 mr-3 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">创新性</h3>
+                    <p className="text-gray-600">选择具有创新性和前瞻性的项目，提升学术价值。</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">真实评价系统</h3>
-                  <p className="text-gray-600">
-                    展示真实的学生评价和反馈，帮助学生了解导师的教学风格和指导方式。
-                  </p>
+                <div className="flex items-start">
+                  <Star className="h-6 w-6 text-yellow-500 mr-3 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">实用性</h3>
+                    <p className="text-gray-600">选择能够解决实际问题、具有应用价值的项目。</p>
+                  </div>
                 </div>
-              </div>
-
-              <div className="flex items-start">
-                <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center mr-4 mt-1">
-                  <span className="text-indigo-600 font-bold">5</span>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">移动端适配</h3>
-                  <p className="text-gray-600">
-                    完美支持手机和平板设备，随时随地浏览导师信息。
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start">
-                <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center mr-4 mt-1">
-                  <span className="text-indigo-600 font-bold">6</span>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">持续更新</h3>
-                  <p className="text-gray-600">
-                    定期更新导师信息和项目数据，确保信息的准确性和时效性。
-                  </p>
+                <div className="flex items-start">
+                  <Star className="h-6 w-6 text-yellow-500 mr-3 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">团队合作</h3>
+                    <p className="text-gray-600">考虑项目的团队协作要求，选择适合的项目类型。</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* 团队介绍 */}
+        {/* 常见误区 */}
         <div className="bg-white rounded-xl shadow-lg p-8 mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">我们的团队</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-24 h-24 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="h-12 w-12 text-indigo-600" />
+          <div className="text-center mb-8">
+            <AlertCircle className="h-12 w-12 text-red-500 mx-auto mb-4" />
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">常见误区</h2>
+          </div>
+          <div className="max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="space-y-6">
+                <div className="flex items-start">
+                  <AlertCircle className="h-6 w-6 text-red-500 mr-3 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">只看名气</h3>
+                    <p className="text-gray-600">不要只看导师的名气，要关注研究方向和指导风格是否适合您。</p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <AlertCircle className="h-6 w-6 text-red-500 mr-3 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">忽视沟通</h3>
+                    <p className="text-gray-600">选择导师前一定要与导师沟通，了解彼此的期望和要求。</p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <AlertCircle className="h-6 w-6 text-red-500 mr-3 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">盲目跟风</h3>
+                    <p className="text-gray-600">不要因为某个研究方向热门就盲目选择，要考虑自己的兴趣和能力。</p>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">产品团队</h3>
-              <p className="text-gray-600">
-                专注于用户体验设计，确保平台的易用性和美观性。
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <BookOpen className="h-12 w-12 text-green-600" />
+              <div className="space-y-6">
+                <div className="flex items-start">
+                  <AlertCircle className="h-6 w-6 text-red-500 mr-3 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">忽视资源</h3>
+                    <p className="text-gray-600">不要忽视实验室资源和资金支持，这些对项目成功很重要。</p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <AlertCircle className="h-6 w-6 text-red-500 mr-3 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">急于决定</h3>
+                    <p className="text-gray-600">不要急于做决定，要充分了解导师和项目后再做选择。</p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <AlertCircle className="h-6 w-6 text-red-500 mr-3 mt-1 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">忽视长期规划</h3>
+                    <p className="text-gray-600">要考虑导师和项目对您长期职业发展的影响。</p>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">技术团队</h3>
-              <p className="text-gray-600">
-                负责平台的技术架构和功能开发，确保系统的稳定性和性能。
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-24 h-24 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Target className="h-12 w-12 text-purple-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">数据团队</h3>
-              <p className="text-gray-600">
-                负责数据收集、分析和算法优化，提供精准的匹配服务。
-              </p>
             </div>
           </div>
         </div>
 
-        {/* 统计数据 */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-          <div className="bg-white rounded-xl p-6 shadow-lg text-center">
-            <div className="text-3xl font-bold text-indigo-600 mb-2">50+</div>
-            <div className="text-gray-600">注册导师</div>
+        {/* 成功案例 */}
+        <div className="bg-white rounded-xl shadow-lg p-8 mb-16">
+          <div className="text-center mb-8">
+            <Award className="h-12 w-12 text-indigo-600 mx-auto mb-4" />
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">成功案例</h2>
           </div>
-          <div className="bg-white rounded-xl p-6 shadow-lg text-center">
-            <div className="text-3xl font-bold text-green-600 mb-2">1000+</div>
-            <div className="text-gray-600">在校学生</div>
-          </div>
-          <div className="bg-white rounded-xl p-6 shadow-lg text-center">
-            <div className="text-3xl font-bold text-yellow-600 mb-2">90%</div>
-            <div className="text-gray-600">匹配成功率</div>
-          </div>
-          <div className="bg-white rounded-xl p-6 shadow-lg text-center">
-            <div className="text-3xl font-bold text-purple-600 mb-2">4.5</div>
-            <div className="text-gray-600">平均评分</div>
+          <div className="max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <TrendingUp className="h-8 w-8 text-green-600" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">张同学</h3>
+                <p className="text-gray-600 text-sm">
+                  通过平台找到合适的AI导师，成功完成机器学习项目，获得优秀毕业论文奖。
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <BookOpen className="h-8 w-8 text-blue-600" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">李同学</h3>
+                <p className="text-gray-600 text-sm">
+                  选择VR技术项目，在导师指导下发表SCI论文，获得保研资格。
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Target className="h-8 w-8 text-purple-600" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">王同学</h3>
+                <p className="text-gray-600 text-sm">
+                  通过对比分析选择网络安全导师，成功进入知名互联网公司工作。
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
         {/* 联系我们 */}
         <div className="bg-white rounded-xl shadow-lg p-8">
-          <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">联系我们</h2>
           <div className="text-center">
-            <div className="flex items-center justify-center mb-4">
-              <Mail className="h-6 w-6 text-indigo-600 mr-3" />
-              <span className="text-xl text-gray-900 font-medium">henry@luo.cn</span>
-            </div>
-            <p className="text-gray-600">
-              如有任何问题或建议，欢迎通过邮箱联系我们
+            <Mail className="h-12 w-12 text-indigo-600 mx-auto mb-4" />
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">需要更多帮助？</h2>
+            <p className="text-lg text-gray-600 mb-6">
+              如果您在选择导师或项目时遇到困难，我们随时为您提供帮助。
             </p>
+            <div className="flex justify-center">
+              <a
+                href="mailto:henry@luo.cn"
+                className="inline-flex items-center px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors"
+              >
+                <Mail className="h-5 w-5 mr-2" />
+                联系我们
+              </a>
+            </div>
           </div>
         </div>
       </div>

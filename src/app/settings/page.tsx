@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Save, RotateCcw, Download, Upload, Settings as SettingsIcon } from 'lucide-react';
+import Head from 'next/head';
+import { Save, RotateCcw, Download, Upload, Settings as SettingsIcon, BookOpen } from 'lucide-react';
 import { UserSettings } from '@/types/dataset';
 import { getSettings, saveSettings, exportData, importData, clearAllData } from '@/lib/storage';
 import { validateWeights, normalizeWeights, DEFAULT_WEIGHTS } from '@/lib/scoring';
@@ -178,8 +179,14 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <>
+      <Head>
+        <title>设置 - 大学导师选择分析平台</title>
+        <meta name="description" content="配置评分权重、显示偏好和数据管理选项" />
+        <meta name="keywords" content="设置,评分权重,显示偏好,数据管理" />
+      </Head>
+      <div className="min-h-screen bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* 页面标题 */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 flex items-center">
@@ -474,7 +481,50 @@ export default function SettingsPage() {
             {saving ? '保存中...' : '保存设置'}
           </button>
         </div>
+        </div>
       </div>
-    </div>
+
+      {/* 页脚 */}
+      <footer className="bg-gray-900 text-white py-12 mt-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <div className="flex items-center mb-4">
+                <BookOpen className="h-6 w-6 text-indigo-400" />
+                <span className="ml-2 text-lg font-semibold">导师选择分析平台</span>
+              </div>
+              <p className="text-gray-400 text-sm">
+                为大学生提供最专业的导师选择建议，让学术之路更加清晰明确。
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">功能特色</h3>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li>智能匹配推荐</li>
+                <li>数据分析对比</li>
+                <li>评价系统</li>
+                <li>搜索筛选</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">帮助中心</h3>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li>使用指南</li>
+                <li>常见问题</li>
+                <li>联系我们</li>
+                <li>意见反馈</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">联系我们</h3>
+              <p className="text-sm text-gray-400 mb-2">邮箱: henry@luo.cn</p>
+            </div>
+          </div>
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
+            <p>&copy; 2025 导师选择分析平台. 保留所有权利.</p>
+          </div>
+        </div>
+      </footer>
+    </>
   );
 }

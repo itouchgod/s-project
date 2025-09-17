@@ -331,95 +331,119 @@ export default function MentorsPage() {
         </div>
 
         {/* 导师列表 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {currentMentors.map((mentor) => (
-            <Link
-              key={mentor.id}
-              href={`/mentors/${mentor.id}`}
-              onClick={() => handleMentorClick(mentor.id)}
-              className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden"
-            >
-              <div className="p-6">
-                {/* 导师头像和基本信息 */}
-                <div className="flex items-start space-x-4 mb-4">
-                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-2xl font-bold text-blue-600">
-                      {mentor.name.charAt(0)}
-                    </span>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-lg font-semibold text-gray-900 truncate">
-                      {mentor.name}
-                    </h3>
-                    <p className="text-sm text-gray-600">{mentor.title}</p>
-                    <p className="text-sm text-gray-500">{mentor.department}</p>
-                  </div>
-                  <div className="text-right">
-                    <div className={`text-2xl font-bold ${getScoreColor(mentor.score.overall)}`}>
-                      {mentor.score.overall.toFixed(1)}
-                    </div>
-                    <div className="flex items-center text-yellow-500 text-sm">
-                      <Star className="h-4 w-4 fill-current" />
-                      <span className="ml-1">{mentor.rating.toFixed(1)}</span>
-                    </div>
-                  </div>
-                </div>
+        <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    导师信息
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    院系
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    研究方向
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    学生数
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    评分
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    可用性
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {currentMentors.map((mentor) => (
+                  <tr
+                    key={mentor.id}
+                    className="hover:bg-gray-50 cursor-pointer transition-colors duration-150"
+                    onClick={() => {
+                      handleMentorClick(mentor.id);
+                      window.location.href = `/mentors/${mentor.id}`;
+                    }}
+                  >
+                    {/* 导师信息 */}
+                    <td className="px-6 py-4">
+                      <div className="flex items-center">
+                        <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                          <span className="text-lg font-bold text-blue-600">
+                            {mentor.name.charAt(0)}
+                          </span>
+                        </div>
+                        <div className="min-w-0">
+                          <div className="text-sm font-medium text-gray-900 truncate">
+                            {mentor.name}
+                          </div>
+                          <div className="text-sm text-gray-500 truncate">
+                            {mentor.title}
+                          </div>
+                          <div className="text-xs text-gray-400 line-clamp-2 mt-1">
+                            {mentor.description}
+                          </div>
+                        </div>
+                      </div>
+                    </td>
 
-                {/* 导师描述 */}
-                <p className="text-gray-700 text-sm mb-4 line-clamp-3">
-                  {mentor.description}
-                </p>
+                    {/* 院系 */}
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      {mentor.department}
+                    </td>
 
-                {/* 研究方向 */}
-                <div className="mb-4">
-                  <div className="flex flex-wrap gap-1">
-                    {mentor.researchFields.slice(0, 3).map((field, index) => (
-                      <span
-                        key={index}
-                        className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded"
-                      >
-                        {field}
+                    {/* 研究方向 */}
+                    <td className="px-6 py-4">
+                      <div className="flex flex-wrap gap-1 max-w-xs">
+                        {mentor.researchFields.slice(0, 3).map((field, index) => (
+                          <span
+                            key={index}
+                            className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded"
+                          >
+                            {field}
+                          </span>
+                        ))}
+                        {mentor.researchFields.length > 3 && (
+                          <span className="px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded">
+                            +{mentor.researchFields.length - 3}
+                          </span>
+                        )}
+                      </div>
+                    </td>
+
+                    {/* 学生数 */}
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      <div className="flex items-center">
+                        <Users className="h-4 w-4 mr-1 text-gray-400" />
+                        <span>{mentor.studentCount}</span>
+                      </div>
+                    </td>
+
+                    {/* 评分 */}
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="flex items-center">
+                        <div className={`text-lg font-bold ${getScoreColor(mentor.score.overall)}`}>
+                          {mentor.score.overall.toFixed(1)}
+                        </div>
+                        <div className="ml-2 flex items-center text-yellow-500 text-sm">
+                          <Star className="h-3 w-3 fill-current" />
+                          <span className="ml-1">{mentor.rating.toFixed(1)}</span>
+                        </div>
+                      </div>
+                    </td>
+
+                    {/* 可用性 */}
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${getAvailabilityColor(mentor.isAvailable)}`}>
+                        {mentor.isAvailable ? '可接收' : '已满员'}
                       </span>
-                    ))}
-                    {mentor.researchFields.length > 3 && (
-                      <span className="px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded">
-                        +{mentor.researchFields.length - 3}
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                {/* 统计信息 */}
-                <div className="flex justify-between items-center text-sm text-gray-600 mb-4">
-                  <div className="flex items-center space-x-4">
-                    <div className="flex items-center">
-                      <Users className="h-4 w-4 mr-1" />
-                      <span>{mentor.studentCount} 学生</span>
-                    </div>
-                    <div className="flex items-center">
-                      <MessageSquare className="h-4 w-4 mr-1" />
-                      <span>{mentor.reviewCount} 评价</span>
-                    </div>
-                  </div>
-                  <span className={`px-2 py-1 rounded-full text-xs ${getAvailabilityColor(mentor.isAvailable)}`}>
-                    {mentor.isAvailable ? '可接收' : '已满员'}
-                  </span>
-                </div>
-
-                {/* 标签 */}
-                <div className="flex flex-wrap gap-1">
-                  {mentor.tags.slice(0, 2).map((tag, index) => (
-                    <span
-                      key={index}
-                      className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </Link>
-          ))}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
 
         {/* 分页 */}
@@ -469,6 +493,48 @@ export default function MentorsPage() {
         )}
         </div>
       </div>
+
+      {/* 页脚 */}
+      <footer className="bg-gray-900 text-white py-12 mt-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <div className="flex items-center mb-4">
+                <BookOpen className="h-6 w-6 text-indigo-400" />
+                <span className="ml-2 text-lg font-semibold">导师选择分析平台</span>
+              </div>
+              <p className="text-gray-400 text-sm">
+                为大学生提供最专业的导师选择建议，让学术之路更加清晰明确。
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">功能特色</h3>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li>智能匹配推荐</li>
+                <li>数据分析对比</li>
+                <li>评价系统</li>
+                <li>搜索筛选</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">帮助中心</h3>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li>使用指南</li>
+                <li>常见问题</li>
+                <li>联系我们</li>
+                <li>意见反馈</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">联系我们</h3>
+              <p className="text-sm text-gray-400 mb-2">邮箱: henry@luo.cn</p>
+            </div>
+          </div>
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
+            <p>&copy; 2025 导师选择分析平台. 保留所有权利.</p>
+          </div>
+        </div>
+      </footer>
     </>
   );
 }

@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { Search, Filter, BarChart3, Users, Star, BookOpen } from 'lucide-react';
+import { Search, Filter, BarChart3, Users, Star, BookOpen, Target, TrendingUp, Shield, Lightbulb, ArrowRight, CheckCircle } from 'lucide-react';
 import { realMentors, realStatistics, realResearchFields } from '@/data/realData';
 import Navigation from '@/components/Navigation';
 import MentorCard from '@/components/MentorCard';
@@ -56,52 +56,196 @@ export default function Home() {
           {/* 快速入口按钮 */}
           <div className="flex flex-wrap justify-center gap-4 mt-8">
             <a
-              href="/projects"
+              href="/mentors"
               className="flex items-center px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
             >
-              <BookOpen className="h-5 w-5 mr-2" />
-              浏览项目
+              <Users className="h-5 w-5 mr-2" />
+              浏览导师
             </a>
             <a
-              href="/mentors"
+              href="/projects"
               className="flex items-center px-6 py-3 bg-white text-indigo-600 border border-indigo-600 rounded-lg hover:bg-indigo-50 transition-colors"
             >
-              <Users className="h-5 w-5 mr-2" />
-              查看导师
+              <BookOpen className="h-5 w-5 mr-2" />
+              查看项目
+            </a>
+            <a
+              href="/compare"
+              className="flex items-center px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+            >
+              <BarChart3 className="h-5 w-5 mr-2" />
+              开始对比
             </a>
           </div>
         </div>
 
-        {/* 功能特色 */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
-          <div className="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-            <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
-              <Users className="h-6 w-6 text-indigo-600" />
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">智能匹配</h3>
-            <p className="text-gray-600">
-              基于你的兴趣、学术背景和研究方向，智能推荐最适合的导师，提高匹配成功率。
-            </p>
+        {/* 平台功能 */}
+        <div className="bg-white rounded-xl p-8 shadow-lg mb-16">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">平台功能</h2>
+            <p className="text-lg text-gray-600">我们提供全面的导师选择和分析工具，帮助您做出最佳决策</p>
           </div>
-
-          <div className="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-            <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-              <BarChart3 className="h-6 w-6 text-green-600" />
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="text-center p-6 border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
+              <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Users className="h-6 w-6 text-indigo-600" />
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">智能匹配</h3>
+              <p className="text-sm text-gray-600">基于兴趣和背景智能推荐最适合的导师</p>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">数据分析</h3>
-            <p className="text-gray-600">
-              提供详细的导师数据分析和对比，包括研究方向、学术成果、学生评价等维度。
-            </p>
+
+            <div className="text-center p-6 border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
+              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <BarChart3 className="h-6 w-6 text-green-600" />
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">数据分析</h3>
+              <p className="text-sm text-gray-600">多维度数据分析和对比，提供客观参考</p>
+            </div>
+
+            <div className="text-center p-6 border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
+              <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Star className="h-6 w-6 text-yellow-600" />
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">评价系统</h3>
+              <p className="text-sm text-gray-600">真实学生评价，了解导师指导风格</p>
+            </div>
+
+            <div className="text-center p-6 border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
+              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Target className="h-6 w-6 text-purple-600" />
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">对比分析</h3>
+              <p className="text-sm text-gray-600">多维度对比分析，找到最佳选择</p>
+            </div>
           </div>
+        </div>
 
-          <div className="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-            <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4">
-              <Star className="h-6 w-6 text-yellow-600" />
+        {/* 使用方法 */}
+        <div className="bg-white rounded-xl p-8 shadow-lg mb-16">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">如何使用平台</h2>
+            <p className="text-lg text-gray-600">简单三步，轻松找到您的理想导师</p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-indigo-600">1</span>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">浏览导师</h3>
+              <p className="text-gray-600 mb-4">浏览导师列表，了解基本信息、研究方向和项目情况</p>
+              <div className="flex items-center justify-center text-indigo-600">
+                <BookOpen className="h-4 w-4 mr-1" />
+                <span className="text-sm">查看导师详情</span>
+              </div>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">评价系统</h3>
-            <p className="text-gray-600">
-              真实的学生评价和反馈，帮助你了解导师的教学风格和指导方式。
-            </p>
+
+            <div className="text-center">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-green-600">2</span>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">对比分析</h3>
+              <p className="text-gray-600 mb-4">选择感兴趣的导师和项目，进行多维度对比分析</p>
+              <div className="flex items-center justify-center text-green-600">
+                <BarChart3 className="h-4 w-4 mr-1" />
+                <span className="text-sm">开始对比</span>
+              </div>
+            </div>
+
+            <div className="text-center">
+              <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-yellow-600">3</span>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">做出选择</h3>
+              <p className="text-gray-600 mb-4">基于分析结果和您的需求，做出最适合的选择</p>
+              <div className="flex items-center justify-center text-yellow-600">
+                <CheckCircle className="h-4 w-4 mr-1" />
+                <span className="text-sm">确认选择</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 快速开始指南 */}
+        <div className="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-xl p-8 mb-16">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">快速开始指南</h2>
+            <p className="text-lg text-gray-600">新用户？按照以下步骤快速上手</p>
+          </div>
+          
+          <div className="max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="space-y-4">
+                <div className="flex items-start">
+                  <div className="w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                    <span className="text-sm font-bold">1</span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-1">了解平台功能</h3>
+                    <p className="text-gray-600 text-sm">浏览首页了解平台的主要功能和特色</p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <div className="w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                    <span className="text-sm font-bold">2</span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-1">浏览导师列表</h3>
+                    <p className="text-gray-600 text-sm">查看所有可用导师的详细信息和研究方向</p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <div className="w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                    <span className="text-sm font-bold">3</span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-1">查看项目详情</h3>
+                    <p className="text-gray-600 text-sm">了解每个导师的研究项目和项目要求</p>
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div className="flex items-start">
+                  <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                    <span className="text-sm font-bold">4</span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-1">进行对比分析</h3>
+                    <p className="text-gray-600 text-sm">选择感兴趣的导师和项目进行多维度对比</p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                    <span className="text-sm font-bold">5</span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-1">查看数据分析</h3>
+                    <p className="text-gray-600 text-sm">浏览数据分析页面了解平台整体情况</p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                    <span className="text-sm font-bold">6</span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-1">做出最终选择</h3>
+                    <p className="text-gray-600 text-sm">基于分析结果和您的需求做出最适合的选择</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="text-center mt-8">
+              <a
+                href="/about"
+                className="inline-flex items-center px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+              >
+                <Lightbulb className="h-5 w-5 mr-2" />
+                查看详细建议
+                <ArrowRight className="h-4 w-4 ml-2" />
+              </a>
+            </div>
           </div>
         </div>
 
