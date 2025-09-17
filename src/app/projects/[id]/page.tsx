@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Head from 'next/head';
 import { useParams } from 'next/navigation';
 import { Project, Mentor, ProjectScore, MentorScore } from '@/types/dataset';
 import { getProjectsWithScores, getMentorsWithScores } from '@/lib/data-loader';
@@ -125,8 +126,14 @@ export default function ProjectDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <>
+      <Head>
+        <title>{project?.title || '项目详情'} - 大学导师选择分析平台</title>
+        <meta name="description" content={`${project?.title || '项目详情'}的详细信息，包括项目描述、要求、导师信息等`} />
+        <meta name="keywords" content={`${project?.title || '项目'},项目详情,${project?.category || ''},${mentor?.name || ''}`} />
+      </Head>
+      <div className="min-h-screen bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* 面包屑导航 */}
         <nav className="flex items-center space-x-2 text-sm text-gray-500 mb-8">
           <Link href="/" className="hover:text-gray-700">首页</Link>
@@ -358,7 +365,8 @@ export default function ProjectDetailPage() {
             </div>
           </div>
         </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

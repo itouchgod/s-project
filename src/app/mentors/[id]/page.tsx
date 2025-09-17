@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { 
   Star, 
   BookOpen, 
@@ -41,9 +42,15 @@ export default function MentorDetailPage({ params }: { params: { id: string } })
 
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* 导航栏 */}
-      <Navigation />
+    <>
+      <Head>
+        <title>{mentor.name} - 导师详情 - 大学导师选择分析平台</title>
+        <meta name="description" content={`${mentor.name}导师的详细信息，包括研究方向、项目、学生评价等`} />
+        <meta name="keywords" content={`${mentor.name},导师详情,${mentor.department},${mentor.researchFields.join(',')}`} />
+      </Head>
+      <div className="min-h-screen bg-gray-50">
+        {/* 导航栏 */}
+        <Navigation />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* 返回按钮 */}
@@ -140,6 +147,7 @@ export default function MentorDetailPage({ params }: { params: { id: string } })
         {/* 标签页内容 */}
         <MentorDetailTabs mentor={mentor} reviews={reviews} />
       </div>
-    </div>
+      </div>
+    </>
   );
 }
