@@ -247,66 +247,74 @@ export default function ProjectsPage() {
         </div>
 
         {/* 项目列表 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="space-y-4">
           {currentProjects.map((project) => (
             <Link
               key={project.id}
               href={`/projects/${project.id}`}
               onClick={() => handleProjectClick(project.id)}
-              className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden"
+              className="block bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 border border-gray-200 hover:border-gray-300"
             >
               <div className="p-6">
-                {/* 项目标题和评分 */}
-                <div className="flex justify-between items-start mb-3">
-                  <h3 className="text-lg font-semibold text-gray-900 line-clamp-2">
-                    {project.title}
-                  </h3>
-                  <div className={`text-lg font-bold ${getScoreColor(project.score.overall)}`}>
-                    {project.score.overall.toFixed(1)}
+                <div className="flex items-start justify-between">
+                  {/* 左侧：项目信息 */}
+                  <div className="flex-1 min-w-0">
+                    {/* 项目标题和评分 */}
+                    <div className="flex items-start justify-between mb-3 gap-4">
+                      <h3 className="text-lg sm:text-xl font-semibold text-gray-900 line-clamp-2 flex-1 min-w-0">
+                        {project.title}
+                      </h3>
+                      <div className={`text-xl sm:text-2xl font-bold ${getScoreColor(project.score.overall)} flex-shrink-0`}>
+                        {project.score.overall.toFixed(1)}
+                      </div>
+                    </div>
+
+                    {/* 导师信息 */}
+                    <p className="text-sm text-gray-600 mb-3">
+                      <span className="font-medium">导师：</span>{project.mentorName}
+                    </p>
+
+                    {/* 项目描述 */}
+                    <p className="text-gray-700 text-sm mb-4 line-clamp-2">
+                      {project.description}
+                    </p>
+
+                    {/* 底部信息行 */}
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                      {/* 标签 */}
+                      <div className="flex flex-wrap gap-2">
+                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${getDifficultyColor(project.difficulty)}`}>
+                          {project.difficulty === 'beginner' ? '初级' : 
+                           project.difficulty === 'intermediate' ? '中级' : '高级'}
+                        </span>
+                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(project.status)}`}>
+                          {project.status === 'ongoing' ? '进行中' :
+                           project.status === 'completed' ? '已完成' :
+                           project.status === 'cancelled' ? '已取消' : '规划中'}
+                        </span>
+                        <span className="px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                          {project.category}
+                        </span>
+                      </div>
+
+                      {/* 关键词 */}
+                      <div className="flex flex-wrap gap-1">
+                        {project.keywords.slice(0, 4).map((keyword, index) => (
+                          <span
+                            key={index}
+                            className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded"
+                          >
+                            {keyword}
+                          </span>
+                        ))}
+                        {project.keywords.length > 4 && (
+                          <span className="px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded">
+                            +{project.keywords.length - 4}
+                          </span>
+                        )}
+                      </div>
+                    </div>
                   </div>
-                </div>
-
-                {/* 导师信息 */}
-                <p className="text-sm text-gray-600 mb-3">
-                  导师：{project.mentorName}
-                </p>
-
-                {/* 项目描述 */}
-                <p className="text-gray-700 text-sm mb-4 line-clamp-3">
-                  {project.description}
-                </p>
-
-                {/* 标签 */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <span className={`px-2 py-1 rounded-full text-xs ${getDifficultyColor(project.difficulty)}`}>
-                    {project.difficulty === 'beginner' ? '初级' : 
-                     project.difficulty === 'intermediate' ? '中级' : '高级'}
-                  </span>
-                  <span className={`px-2 py-1 rounded-full text-xs ${getStatusColor(project.status)}`}>
-                    {project.status === 'ongoing' ? '进行中' :
-                     project.status === 'completed' ? '已完成' :
-                     project.status === 'cancelled' ? '已取消' : '规划中'}
-                  </span>
-                  <span className="px-2 py-1 rounded-full text-xs bg-purple-100 text-purple-800">
-                    {project.category}
-                  </span>
-                </div>
-
-                {/* 关键词 */}
-                <div className="flex flex-wrap gap-1">
-                  {project.keywords.slice(0, 3).map((keyword, index) => (
-                    <span
-                      key={index}
-                      className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded"
-                    >
-                      {keyword}
-                    </span>
-                  ))}
-                  {project.keywords.length > 3 && (
-                    <span className="px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded">
-                      +{project.keywords.length - 3}
-                    </span>
-                  )}
                 </div>
               </div>
             </Link>
