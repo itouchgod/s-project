@@ -26,6 +26,8 @@ export default function ComparePage() {
   const [selectedItems, setSelectedItems] = useState<ComparisonItem[]>([]);
   const [showAddModal, setShowAddModal] = useState(false);
   const [newComparisonName, setNewComparisonName] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(20);
 
   useEffect(() => {
     loadData();
@@ -114,6 +116,28 @@ export default function ComparePage() {
       case 'planning': return 'bg-yellow-100 text-yellow-800';
       default: return 'bg-gray-100 text-gray-800';
     }
+  };
+
+  // 分页逻辑
+  const getCurrentItems = () => {
+    const items = activeTab === 'projects' ? projects : mentors;
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return items.slice(startIndex, endIndex);
+  };
+
+  const getTotalPages = () => {
+    const items = activeTab === 'projects' ? projects : mentors;
+    return Math.ceil(items.length / itemsPerPage);
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const handleTabChange = (tab: 'projects' | 'mentors') => {
+    setActiveTab(tab);
+    setCurrentPage(1); // 切换标签时重置到第一页
   };
 
   if (loading) {
@@ -242,6 +266,15 @@ export default function ComparePage() {
               </div>
             )}
 
+            {/* 数据统计 */}
+            <div className="mb-4 text-sm text-gray-600">
+              {activeTab === 'projects' ? (
+                <>共找到 <span className="font-semibold text-indigo-600">{projects.length}</span> 个项目</>
+              ) : (
+                <>共找到 <span className="font-semibold text-indigo-600">{mentors.length}</span> 位导师</>
+              )}
+            </div>
+
             {/* 项目列表 */}
             {activeTab === 'projects' && (
               <div className="bg-white rounded-lg shadow-sm overflow-hidden">
@@ -273,7 +306,9 @@ export default function ComparePage() {
                       </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
-                      {projects.slice(0, 20).map((project) => (
+                      {getCurrentItems().map((item) => {
+                        const project = item as ProjectWithScore;
+                        return (
                         <tr key={project.id} className="hover:bg-gray-50">
                           <td className="px-6 py-4">
                             <div className="max-w-xs">
@@ -322,7 +357,8 @@ export default function ComparePage() {
                             </button>
                           </td>
                         </tr>
-                      ))}
+                        );
+                      })}
                     </tbody>
                   </table>
                 </div>
@@ -360,7 +396,9 @@ export default function ComparePage() {
                       </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
-                      {mentors.slice(0, 20).map((mentor) => (
+                      {getCurrentItems().map((item) => {
+                        const mentor = item as MentorWithScore;
+                        return (
                         <tr key={mentor.id} className="hover:bg-gray-50">
                           <td className="px-6 py-4">
                             <div className="flex items-center">
@@ -428,10 +466,73 @@ export default function ComparePage() {
                             </button>
                           </td>
                         </tr>
-                      ))}
+                        );
+                      })}
                     </tbody>
                   </table>
                 </div>
+                
+                {/* 分页控件 */}
+                {getTotalPages() > 1 && (
+                  <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+                    <div className="flex-1 flex justify-between sm:hidden">
+                      <button
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        disabled={currentPage === 1}
+                        className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        上一页
+                      </button>
+                      <button
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        disabled={currentPage === getTotalPages()}
+                        className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        下一页
+                      </button>
+                    </div>
+                    <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                      <div>
+                        <p className="text-sm text-gray-700">
+                          显示第 <span className="font-medium">{(currentPage - 1) * itemsPerPage + 1}</span> 到{' '}
+                          <span className="font-medium">{Math.min(currentPage * itemsPerPage, getTotalPages() * itemsPerPage)}</span>{' '}
+                          条，共 <span className="font-medium">{getTotalPages() * itemsPerPage}</span> 条
+                        </p>
+                      </div>
+                      <div>
+                        <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                          <button
+                            onClick={() => handlePageChange(currentPage - 1)}
+                            disabled={currentPage === 1}
+                            className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                          >
+                            上一页
+                          </button>
+                          {Array.from({ length: getTotalPages() }, (_, i) => i + 1).map((page) => (
+                            <button
+                              key={page}
+                              onClick={() => handlePageChange(page)}
+                              className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${
+                                page === currentPage
+                                  ? 'z-10 bg-indigo-50 border-indigo-500 text-indigo-600'
+                                  : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'
+                              }`}
+                            >
+                              {page}
+                            </button>
+                          ))}
+                          <button
+                            onClick={() => handlePageChange(currentPage + 1)}
+                            disabled={currentPage === getTotalPages()}
+                            className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                          >
+                            下一页
+                          </button>
+                        </nav>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
           </div>
