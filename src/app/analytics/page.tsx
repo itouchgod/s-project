@@ -156,7 +156,7 @@ export default function AnalyticsPage() {
 
   const departmentData = Object.entries(departmentStats).map(([department, count]) => ({
     field: department,
-    count
+    count: count as number
   })).sort((a, b) => b.count - a.count);
 
   // 按职称统计
@@ -167,7 +167,7 @@ export default function AnalyticsPage() {
 
   const titleData = Object.entries(titleStats).map(([title, count]) => ({
     field: title,
-    count
+    count: count as number
   })).sort((a, b) => b.count - a.count);
 
   if (loading) {
@@ -332,7 +332,7 @@ export default function AnalyticsPage() {
               data={Object.entries(projectStats.byDifficulty).map(([difficulty, count]) => ({
                 field: difficulty === 'beginner' ? '初级' : 
                        difficulty === 'intermediate' ? '中级' : '高级',
-                count
+                count: count as number
               }))} 
               title="项目难度分布" 
               color="blue"
@@ -344,7 +344,7 @@ export default function AnalyticsPage() {
                 field: status === 'ongoing' ? '进行中' :
                        status === 'completed' ? '已完成' :
                        status === 'cancelled' ? '已取消' : '规划中',
-                count
+                count: count as number
               }))} 
               title="项目状态分布" 
               color="green"
@@ -354,7 +354,7 @@ export default function AnalyticsPage() {
             <BarChart 
               data={Object.entries(projectStats.byCategory).map(([category, count]) => ({
                 field: category,
-                count
+                count: count as number
               }))} 
               title="项目类别分布" 
               color="purple"
