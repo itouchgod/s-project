@@ -6,6 +6,7 @@ import { Save, RotateCcw, Download, Upload, Settings as SettingsIcon, BookOpen }
 import { UserSettings } from '@/types/dataset';
 import { getSettings, saveSettings, exportData, importData, clearAllData } from '@/lib/storage';
 import { validateWeights, normalizeWeights, DEFAULT_WEIGHTS } from '@/lib/scoring';
+import Navigation from '@/components/Navigation';
 
 export default function SettingsPage() {
   const [settings, setSettings] = useState<UserSettings>({
@@ -186,6 +187,9 @@ export default function SettingsPage() {
         <meta name="keywords" content="设置,评分权重,显示偏好,数据管理" />
       </Head>
       <div className="min-h-screen bg-gray-50">
+        {/* 导航栏 */}
+        <Navigation />
+        
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* 页面标题 */}
         <div className="mb-8">

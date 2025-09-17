@@ -7,6 +7,7 @@ import { Project, Mentor, ProjectScore, MentorScore, Comparison, ComparisonItem 
 import { getProjectsWithScores, getMentorsWithScores } from '@/lib/data-loader';
 import { getComparisons, addComparison, updateComparison, deleteComparison } from '@/lib/storage';
 import Link from 'next/link';
+import Navigation from '@/components/Navigation';
 
 interface ProjectWithScore extends Project {
   score: ProjectScore;
@@ -134,6 +135,9 @@ export default function ComparePage() {
         <meta name="keywords" content="项目对比,导师对比,智能推荐,学术研究" />
       </Head>
       <div className="min-h-screen bg-gray-50">
+        {/* 导航栏 */}
+        <Navigation />
+        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* 页面标题 */}
         <div className="mb-8">

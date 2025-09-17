@@ -8,6 +8,7 @@ import { getMentorsWithScores, searchMentors, filterMentors } from '@/lib/data-l
 import { sortByScore, filterByScoreRange } from '@/lib/scoring';
 import { addToHistory } from '@/lib/storage';
 import Link from 'next/link';
+import Navigation from '@/components/Navigation';
 
 interface MentorWithScore extends Mentor {
   score: MentorScore;
@@ -140,6 +141,9 @@ export default function MentorsPage() {
         <meta name="keywords" content="导师列表,学术指导,导师选择,研究方向" />
       </Head>
       <div className="min-h-screen bg-gray-50">
+        {/* 导航栏 */}
+        <Navigation />
+        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* 页面标题 */}
         <div className="mb-8">

@@ -7,6 +7,7 @@ import { BarChart3, Star, Users, BookOpen, Trash2, Edit3 } from 'lucide-react';
 import { Comparison, ComparisonItem, Project, Mentor } from '@/types/dataset';
 import { getComparisons, updateComparison, deleteComparison } from '@/lib/storage';
 import Link from 'next/link';
+import Navigation from '@/components/Navigation';
 
 export default function ComparisonDetailPage() {
   const params = useParams();
@@ -123,6 +124,9 @@ export default function ComparisonDetailPage() {
         <meta name="keywords" content="对比分析,项目对比,导师对比,详细分析" />
       </Head>
       <div className="min-h-screen bg-gray-50">
+        {/* 导航栏 */}
+        <Navigation />
+        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* 面包屑导航 */}
         <nav className="flex items-center space-x-2 text-sm text-gray-500 mb-8">

@@ -8,6 +8,7 @@ import { getProjectsWithScores, searchProjects, filterProjects } from '@/lib/dat
 import { sortByScore, filterByScoreRange } from '@/lib/scoring';
 import { addToHistory } from '@/lib/storage';
 import Link from 'next/link';
+import Navigation from '@/components/Navigation';
 
 interface ProjectWithScore extends Project {
   score: ProjectScore;
@@ -147,6 +148,9 @@ export default function ProjectsPage() {
         <meta name="keywords" content="研究项目,导师选择,学术研究,项目列表" />
       </Head>
       <div className="min-h-screen bg-gray-50">
+        {/* 导航栏 */}
+        <Navigation />
+        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* 页面标题 */}
         <div className="mb-8">
