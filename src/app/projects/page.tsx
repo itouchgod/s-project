@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Head from 'next/head';
 import { Project, ProjectScore } from '@/types/dataset';
 import { getProjectsWithScores, searchProjects, filterProjects } from '@/lib/data-loader';
 import { sortByScore, filterByScoreRange } from '@/lib/scoring';
@@ -138,8 +139,14 @@ export default function ProjectsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <>
+      <Head>
+        <title>项目列表 - 大学导师选择分析平台</title>
+        <meta name="description" content="浏览和搜索研究项目，找到最适合您的项目进行学习研究" />
+        <meta name="keywords" content="研究项目,导师选择,学术研究,项目列表" />
+      </Head>
+      <div className="min-h-screen bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* 页面标题 */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">项目列表</h1>
@@ -246,79 +253,135 @@ export default function ProjectsPage() {
           </div>
         </div>
 
-        {/* 项目列表 */}
-        <div className="space-y-4">
-          {currentProjects.map((project) => (
-            <Link
-              key={project.id}
-              href={`/projects/${project.id}`}
-              onClick={() => handleProjectClick(project.id)}
-              className="block bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 border border-gray-200 hover:border-gray-300"
-            >
-              <div className="p-6">
-                <div className="flex items-start justify-between">
-                  {/* 左侧：项目信息 */}
-                  <div className="flex-1 min-w-0">
-                    {/* 项目标题和评分 */}
-                    <div className="flex items-start justify-between mb-3 gap-4">
-                      <h3 className="text-lg sm:text-xl font-semibold text-gray-900 line-clamp-2 flex-1 min-w-0">
-                        {project.title}
-                      </h3>
-                      <div className={`text-xl sm:text-2xl font-bold ${getScoreColor(project.score.overall)} flex-shrink-0`}>
+        {/* 项目表格 */}
+        <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider min-w-[200px]">
+                    项目信息
+                  </th>
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
+                    导师
+                  </th>
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    评分
+                  </th>
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">
+                    难度
+                  </th>
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">
+                    状态
+                  </th>
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">
+                    类别
+                  </th>
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden xl:table-cell">
+                    关键词
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {currentProjects.map((project) => (
+                  <tr
+                    key={project.id}
+                    className="hover:bg-gray-50 cursor-pointer transition-colors duration-150"
+                    onClick={() => {
+                      handleProjectClick(project.id);
+                      window.location.href = `/projects/${project.id}`;
+                    }}
+                  >
+                    {/* 项目信息 */}
+                    <td className="px-3 sm:px-6 py-4">
+                      <div className="max-w-xs">
+                        <div className="text-sm font-medium text-gray-900 line-clamp-2 mb-1">
+                          {project.title}
+                        </div>
+                        <div className="text-xs text-gray-500 line-clamp-2">
+                          {project.description}
+                        </div>
+                        {/* 移动端显示导师信息 */}
+                        <div className="text-xs text-gray-600 mt-1 sm:hidden">
+                          导师：{project.mentorName}
+                        </div>
+                        {/* 移动端显示标签 */}
+                        <div className="flex flex-wrap gap-1 mt-2 sm:hidden">
+                          <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${getDifficultyColor(project.difficulty)}`}>
+                            {project.difficulty === 'beginner' ? '初级' : 
+                             project.difficulty === 'intermediate' ? '中级' : '高级'}
+                          </span>
+                          <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(project.status)}`}>
+                            {project.status === 'ongoing' ? '进行中' :
+                             project.status === 'completed' ? '已完成' :
+                             project.status === 'cancelled' ? '已取消' : '规划中'}
+                          </span>
+                          <span className="inline-flex px-2 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-800">
+                            {project.category}
+                          </span>
+                        </div>
+                      </div>
+                    </td>
+
+                    {/* 导师 */}
+                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap hidden sm:table-cell">
+                      <div className="text-sm text-gray-900">{project.mentorName}</div>
+                    </td>
+
+                    {/* 评分 */}
+                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap">
+                      <div className={`text-lg font-bold ${getScoreColor(project.score.overall)}`}>
                         {project.score.overall.toFixed(1)}
                       </div>
-                    </div>
+                    </td>
 
-                    {/* 导师信息 */}
-                    <p className="text-sm text-gray-600 mb-3">
-                      <span className="font-medium">导师：</span>{project.mentorName}
-                    </p>
+                    {/* 难度 */}
+                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap hidden md:table-cell">
+                      <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${getDifficultyColor(project.difficulty)}`}>
+                        {project.difficulty === 'beginner' ? '初级' : 
+                         project.difficulty === 'intermediate' ? '中级' : '高级'}
+                      </span>
+                    </td>
 
-                    {/* 项目描述 */}
-                    <p className="text-gray-700 text-sm mb-4 line-clamp-2">
-                      {project.description}
-                    </p>
+                    {/* 状态 */}
+                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap hidden lg:table-cell">
+                      <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(project.status)}`}>
+                        {project.status === 'ongoing' ? '进行中' :
+                         project.status === 'completed' ? '已完成' :
+                         project.status === 'cancelled' ? '已取消' : '规划中'}
+                      </span>
+                    </td>
 
-                    {/* 底部信息行 */}
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                      {/* 标签 */}
-                      <div className="flex flex-wrap gap-2">
-                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${getDifficultyColor(project.difficulty)}`}>
-                          {project.difficulty === 'beginner' ? '初级' : 
-                           project.difficulty === 'intermediate' ? '中级' : '高级'}
-                        </span>
-                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(project.status)}`}>
-                          {project.status === 'ongoing' ? '进行中' :
-                           project.status === 'completed' ? '已完成' :
-                           project.status === 'cancelled' ? '已取消' : '规划中'}
-                        </span>
-                        <span className="px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
-                          {project.category}
-                        </span>
-                      </div>
+                    {/* 类别 */}
+                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap hidden lg:table-cell">
+                      <span className="inline-flex px-2 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-800">
+                        {project.category}
+                      </span>
+                    </td>
 
-                      {/* 关键词 */}
-                      <div className="flex flex-wrap gap-1">
-                        {project.keywords.slice(0, 4).map((keyword, index) => (
+                    {/* 关键词 */}
+                    <td className="px-3 sm:px-6 py-4 hidden xl:table-cell">
+                      <div className="flex flex-wrap gap-1 max-w-xs">
+                        {project.keywords.slice(0, 3).map((keyword, index) => (
                           <span
                             key={index}
-                            className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded"
+                            className="inline-flex px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded"
                           >
                             {keyword}
                           </span>
                         ))}
-                        {project.keywords.length > 4 && (
-                          <span className="px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded">
-                            +{project.keywords.length - 4}
+                        {project.keywords.length > 3 && (
+                          <span className="inline-flex px-2 py-1 text-xs bg-gray-100 text-gray-500 rounded">
+                            +{project.keywords.length - 3}
                           </span>
                         )}
                       </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          ))}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
 
         {/* 分页 */}
@@ -366,7 +429,8 @@ export default function ProjectsPage() {
             <p className="text-gray-600">尝试调整搜索条件或筛选器</p>
           </div>
         )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

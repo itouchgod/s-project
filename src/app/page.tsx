@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { Search, Filter, BarChart3, Users, Star, BookOpen } from 'lucide-react';
 import { realMentors, realStatistics, realResearchFields } from '@/data/realData';
 import Navigation from '@/components/Navigation';
@@ -5,7 +6,13 @@ import MentorCard from '@/components/MentorCard';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <>
+      <Head>
+        <title>大学导师选择分析平台 - 找到你的理想导师</title>
+        <meta name="description" content="基于数据分析和智能匹配，为大学生提供最合适的导师选择建议，让学术之路更加清晰明确。" />
+        <meta name="keywords" content="导师选择,学术研究,智能匹配,数据分析,大学生" />
+      </Head>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       {/* 导航栏 */}
       <Navigation />
 
@@ -103,19 +110,19 @@ export default function Home() {
           <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">平台数据概览</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="text-3xl font-bold text-indigo-600 mb-2">{realStatistics.totalMentors}+</div>
+              <div className="text-3xl font-bold text-indigo-600 mb-2">50+</div>
               <div className="text-gray-600">注册导师</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-green-600 mb-2">{realStatistics.totalStudents.toLocaleString()}+</div>
+              <div className="text-3xl font-bold text-green-600 mb-2">1000+</div>
               <div className="text-gray-600">在校学生</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-yellow-600 mb-2">95%</div>
+              <div className="text-3xl font-bold text-yellow-600 mb-2">90%</div>
               <div className="text-gray-600">匹配成功率</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-purple-600 mb-2">{realStatistics.averageRating}</div>
+              <div className="text-3xl font-bold text-purple-600 mb-2">4.5</div>
               <div className="text-gray-600">平均评分</div>
             </div>
           </div>
@@ -269,6 +276,7 @@ export default function Home() {
           </div>
         </div>
       </footer>
-    </div>
+      </div>
+    </>
   );
 }

@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { 
   BookOpen, 
   Users, 
@@ -5,18 +6,19 @@ import {
   Lightbulb, 
   Shield, 
   Heart,
-  Mail,
-  Phone,
-  MapPin,
-  Github,
-  Linkedin,
-  Twitter
+  Mail
 } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <>
+      <Head>
+        <title>关于我们 - 大学导师选择分析平台</title>
+        <meta name="description" content="了解我们的使命、团队和平台特色，为大学生提供最专业的导师选择服务" />
+        <meta name="keywords" content="关于我们,导师选择,学术研究,平台介绍" />
+      </Head>
+      <div className="min-h-screen bg-gray-50">
       {/* 导航栏 */}
       <Navigation />
 
@@ -41,7 +43,7 @@ export default function AboutPage() {
               我们相信，通过数据驱动的智能匹配和全面的导师信息展示，可以帮助学生做出更明智的选择。
             </p>
             <p className="text-lg text-gray-600 leading-relaxed">
-              我们的平台整合了184位优秀导师的详细信息，涵盖人工智能、VR技术、网络安全、
+              我们的平台整合了多位优秀导师的详细信息，涵盖人工智能、VR技术、网络安全、
               软件工程等多个前沿领域，为学生提供最全面的导师选择参考。
             </p>
           </div>
@@ -195,19 +197,19 @@ export default function AboutPage() {
         {/* 统计数据 */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
           <div className="bg-white rounded-xl p-6 shadow-lg text-center">
-            <div className="text-3xl font-bold text-indigo-600 mb-2">184+</div>
+            <div className="text-3xl font-bold text-indigo-600 mb-2">50+</div>
             <div className="text-gray-600">注册导师</div>
           </div>
           <div className="bg-white rounded-xl p-6 shadow-lg text-center">
-            <div className="text-3xl font-bold text-green-600 mb-2">2500+</div>
+            <div className="text-3xl font-bold text-green-600 mb-2">1000+</div>
             <div className="text-gray-600">在校学生</div>
           </div>
           <div className="bg-white rounded-xl p-6 shadow-lg text-center">
-            <div className="text-3xl font-bold text-yellow-600 mb-2">95%</div>
+            <div className="text-3xl font-bold text-yellow-600 mb-2">90%</div>
             <div className="text-gray-600">匹配成功率</div>
           </div>
           <div className="bg-white rounded-xl p-6 shadow-lg text-center">
-            <div className="text-3xl font-bold text-purple-600 mb-2">4.6</div>
+            <div className="text-3xl font-bold text-purple-600 mb-2">4.5</div>
             <div className="text-gray-600">平均评分</div>
           </div>
         </div>
@@ -215,39 +217,14 @@ export default function AboutPage() {
         {/* 联系我们 */}
         <div className="bg-white rounded-xl shadow-lg p-8">
           <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">联系我们</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">联系方式</h3>
-              <div className="space-y-4">
-                <div className="flex items-center">
-                  <Mail className="h-5 w-5 text-indigo-600 mr-3" />
-                  <span className="text-gray-600">support@mentor-platform.com</span>
-                </div>
-                <div className="flex items-center">
-                  <Phone className="h-5 w-5 text-indigo-600 mr-3" />
-                  <span className="text-gray-600">400-123-4567</span>
-                </div>
-                <div className="flex items-center">
-                  <MapPin className="h-5 w-5 text-indigo-600 mr-3" />
-                  <span className="text-gray-600">北京市海淀区中关村大街1号</span>
-                </div>
-              </div>
+          <div className="text-center">
+            <div className="flex items-center justify-center mb-4">
+              <Mail className="h-6 w-6 text-indigo-600 mr-3" />
+              <span className="text-xl text-gray-900 font-medium">henry@luo.cn</span>
             </div>
-
-            <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">关注我们</h3>
-              <div className="flex space-x-4">
-                <a href="#" className="p-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
-                  <Github className="h-6 w-6 text-gray-600" />
-                </a>
-                <a href="#" className="p-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
-                  <Linkedin className="h-6 w-6 text-gray-600" />
-                </a>
-                <a href="#" className="p-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
-                  <Twitter className="h-6 w-6 text-gray-600" />
-                </a>
-              </div>
-            </div>
+            <p className="text-gray-600">
+              如有任何问题或建议，欢迎通过邮箱联系我们
+            </p>
           </div>
         </div>
       </div>
@@ -285,15 +262,15 @@ export default function AboutPage() {
             </div>
             <div>
               <h3 className="font-semibold mb-4">联系我们</h3>
-              <p className="text-sm text-gray-400 mb-2">邮箱: support@mentor-platform.com</p>
-              <p className="text-sm text-gray-400">电话: 400-123-4567</p>
+              <p className="text-sm text-gray-400 mb-2">邮箱: henry@luo.cn</p>
             </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
-            <p>&copy; 2024 导师选择分析平台. 保留所有权利.</p>
+            <p>&copy; 2025 导师选择分析平台. 保留所有权利.</p>
           </div>
         </div>
       </footer>
-    </div>
+      </div>
+    </>
   );
 }

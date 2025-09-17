@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Head from 'next/head';
 import { Plus, X, BarChart3, Star, Users, BookOpen, Trash2 } from 'lucide-react';
 import { Project, Mentor, ProjectScore, MentorScore, Comparison, ComparisonItem } from '@/types/dataset';
 import { getProjectsWithScores, getMentorsWithScores } from '@/lib/data-loader';
@@ -126,14 +127,44 @@ export default function ComparePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <>
+      <Head>
+        <title>智能对比分析 - 大学导师选择分析平台</title>
+        <meta name="description" content="快速对比项目和导师，智能推荐最适合您的选择" />
+        <meta name="keywords" content="项目对比,导师对比,智能推荐,学术研究" />
+      </Head>
+      <div className="min-h-screen bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* 页面标题 */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">项目导师对比</h1>
+          <h1 className="text-3xl font-bold text-gray-900">智能对比分析</h1>
           <p className="mt-2 text-gray-600">
-            对比不同项目和导师，找到最适合您的选择
+            快速对比项目和导师，智能推荐最适合您的选择
           </p>
+        </div>
+
+        {/* 快速操作区 */}
+        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6 mb-8">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between">
+            <div>
+              <h2 className="text-xl font-semibold text-gray-900 mb-2">快速开始</h2>
+              <p className="text-gray-600">选择您感兴趣的项目或导师进行对比分析</p>
+            </div>
+            <div className="mt-4 sm:mt-0 flex space-x-3">
+              <button
+                onClick={() => setActiveTab('projects')}
+                className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                选择项目
+              </button>
+              <button
+                onClick={() => setActiveTab('mentors')}
+                className="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors"
+              >
+                选择导师
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* 标签页 */}
@@ -209,115 +240,194 @@ export default function ComparePage() {
 
             {/* 项目列表 */}
             {activeTab === 'projects' && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {projects.slice(0, 12).map((project) => (
-                  <div
-                    key={project.id}
-                    className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
-                  >
-                    <div className="flex justify-between items-start mb-3">
-                      <h4 className="text-lg font-semibold text-gray-900 line-clamp-2">
-                        {project.title}
-                      </h4>
-                      <div className={`text-lg font-bold ${getScoreColor(project.score.overall)}`}>
-                        {project.score.overall.toFixed(1)}
-                      </div>
-                    </div>
-                    
-                    <p className="text-sm text-gray-600 mb-3">
-                      导师：{project.mentorName}
-                    </p>
-                    
-                    <p className="text-gray-700 text-sm mb-4 line-clamp-2">
-                      {project.description}
-                    </p>
-                    
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      <span className={`px-2 py-1 rounded-full text-xs ${getDifficultyColor(project.difficulty)}`}>
-                        {project.difficulty === 'beginner' ? '初级' : 
-                         project.difficulty === 'intermediate' ? '中级' : '高级'}
-                      </span>
-                      <span className={`px-2 py-1 rounded-full text-xs ${getStatusColor(project.status)}`}>
-                        {project.status === 'ongoing' ? '进行中' :
-                         project.status === 'completed' ? '已完成' :
-                         project.status === 'cancelled' ? '已取消' : '规划中'}
-                      </span>
-                      <span className="px-2 py-1 rounded-full text-xs bg-purple-100 text-purple-800">
-                        {project.category}
-                      </span>
-                    </div>
-                    
-                    <button
-                      onClick={() => handleAddToComparison(project, 'project')}
-                      disabled={selectedItems.find(i => i.id === `project-${project.id}`) !== undefined}
-                      className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed"
-                    >
-                      <Plus className="h-4 w-4 inline mr-2" />
-                      添加到对比
-                    </button>
-                  </div>
-                ))}
+              <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div className="overflow-x-auto">
+                  <table className="min-w-full divide-y divide-gray-200">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          项目信息
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          导师
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          评分
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          难度
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          状态
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          类别
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          操作
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="bg-white divide-y divide-gray-200">
+                      {projects.slice(0, 20).map((project) => (
+                        <tr key={project.id} className="hover:bg-gray-50">
+                          <td className="px-6 py-4">
+                            <div className="max-w-xs">
+                              <div className="text-sm font-medium text-gray-900 line-clamp-2 mb-1">
+                                {project.title}
+                              </div>
+                              <div className="text-xs text-gray-500 line-clamp-2">
+                                {project.description}
+                              </div>
+                            </div>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            {project.mentorName}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <div className={`text-lg font-bold ${getScoreColor(project.score.overall)}`}>
+                              {project.score.overall.toFixed(1)}
+                            </div>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${getDifficultyColor(project.difficulty)}`}>
+                              {project.difficulty === 'beginner' ? '初级' : 
+                               project.difficulty === 'intermediate' ? '中级' : '高级'}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(project.status)}`}>
+                              {project.status === 'ongoing' ? '进行中' :
+                               project.status === 'completed' ? '已完成' :
+                               project.status === 'cancelled' ? '已取消' : '规划中'}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <span className="inline-flex px-2 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-800">
+                              {project.category}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <button
+                              onClick={() => handleAddToComparison(project, 'project')}
+                              disabled={selectedItems.find(i => i.id === `project-${project.id}`) !== undefined}
+                              className="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed"
+                            >
+                              <Plus className="h-3 w-3 mr-1" />
+                              {selectedItems.find(i => i.id === `project-${project.id}`) ? '已选择' : '选择'}
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             )}
 
             {/* 导师列表 */}
             {activeTab === 'mentors' && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {mentors.slice(0, 12).map((mentor) => (
-                  <div
-                    key={mentor.id}
-                    className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
-                  >
-                    <div className="flex items-start space-x-3 mb-3">
-                      <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <span className="text-lg font-bold text-blue-600">
-                          {mentor.name.charAt(0)}
-                        </span>
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h4 className="text-lg font-semibold text-gray-900 truncate">
-                          {mentor.name}
-                        </h4>
-                        <p className="text-sm text-gray-600">{mentor.title}</p>
-                        <p className="text-sm text-gray-500">{mentor.department}</p>
-                      </div>
-                      <div className={`text-lg font-bold ${getScoreColor(mentor.score.overall)}`}>
-                        {mentor.score.overall.toFixed(1)}
-                      </div>
-                    </div>
-                    
-                    <p className="text-gray-700 text-sm mb-4 line-clamp-2">
-                      {mentor.description}
-                    </p>
-                    
-                    <div className="flex justify-between items-center text-sm text-gray-600 mb-4">
-                      <div className="flex items-center space-x-4">
-                        <div className="flex items-center">
-                          <Users className="h-4 w-4 mr-1" />
-                          <span>{mentor.studentCount}</span>
-                        </div>
-                        <div className="flex items-center">
-                          <Star className="h-4 w-4 mr-1" />
-                          <span>{mentor.rating.toFixed(1)}</span>
-                        </div>
-                      </div>
-                      <span className={`px-2 py-1 rounded-full text-xs ${
-                        mentor.isAvailable ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                      }`}>
-                        {mentor.isAvailable ? '可接收' : '已满员'}
-                      </span>
-                    </div>
-                    
-                    <button
-                      onClick={() => handleAddToComparison(mentor, 'mentor')}
-                      disabled={selectedItems.find(i => i.id === `mentor-${mentor.id}`) !== undefined}
-                      className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed"
-                    >
-                      <Plus className="h-4 w-4 inline mr-2" />
-                      添加到对比
-                    </button>
-                  </div>
-                ))}
+              <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div className="overflow-x-auto">
+                  <table className="min-w-full divide-y divide-gray-200">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          导师信息
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          院系
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          研究方向
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          学生数
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          评分
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          可用性
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          操作
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="bg-white divide-y divide-gray-200">
+                      {mentors.slice(0, 20).map((mentor) => (
+                        <tr key={mentor.id} className="hover:bg-gray-50">
+                          <td className="px-6 py-4">
+                            <div className="flex items-center">
+                              <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                                <span className="text-sm font-bold text-blue-600">
+                                  {mentor.name.charAt(0)}
+                                </span>
+                              </div>
+                              <div className="min-w-0">
+                                <div className="text-sm font-medium text-gray-900 truncate">
+                                  {mentor.name}
+                                </div>
+                                <div className="text-sm text-gray-500 truncate">
+                                  {mentor.title}
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            {mentor.department}
+                          </td>
+                          <td className="px-6 py-4">
+                            <div className="flex flex-wrap gap-1 max-w-xs">
+                              {mentor.researchFields.slice(0, 2).map((field, index) => (
+                                <span
+                                  key={index}
+                                  className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded"
+                                >
+                                  {field}
+                                </span>
+                              ))}
+                              {mentor.researchFields.length > 2 && (
+                                <span className="px-2 py-1 bg-gray-100 text-gray-500 text-xs rounded">
+                                  +{mentor.researchFields.length - 2}
+                                </span>
+                              )}
+                            </div>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            <div className="flex items-center">
+                              <Users className="h-4 w-4 mr-1 text-gray-400" />
+                              <span>{mentor.studentCount}</span>
+                            </div>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <div className={`text-lg font-bold ${getScoreColor(mentor.score.overall)}`}>
+                              {mentor.score.overall.toFixed(1)}
+                            </div>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
+                              mentor.isAvailable ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                            }`}>
+                              {mentor.isAvailable ? '可接收' : '已满员'}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <button
+                              onClick={() => handleAddToComparison(mentor, 'mentor')}
+                              disabled={selectedItems.find(i => i.id === `mentor-${mentor.id}`) !== undefined}
+                              className="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-300 disabled:cursor-not-allowed"
+                            >
+                              <Plus className="h-3 w-3 mr-1" />
+                              {selectedItems.find(i => i.id === `mentor-${mentor.id}`) ? '已选择' : '选择'}
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             )}
           </div>
@@ -399,7 +509,8 @@ export default function ComparePage() {
             </div>
           </div>
         )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

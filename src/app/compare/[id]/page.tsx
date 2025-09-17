@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
+import Head from 'next/head';
 import { BarChart3, Star, Users, BookOpen, Trash2, Edit3 } from 'lucide-react';
 import { Comparison, ComparisonItem, Project, Mentor } from '@/types/dataset';
 import { getComparisons, updateComparison, deleteComparison } from '@/lib/storage';
@@ -115,8 +116,14 @@ export default function ComparisonDetailPage() {
   const mentors = comparison.items.filter(item => item.type === 'mentor') as ComparisonItem[];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <>
+      <Head>
+        <title>{comparison?.name || '对比详情'} - 大学导师选择分析平台</title>
+        <meta name="description" content={`详细对比分析：${comparison?.name || '对比详情'}`} />
+        <meta name="keywords" content="对比分析,项目对比,导师对比,详细分析" />
+      </Head>
+      <div className="min-h-screen bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* 面包屑导航 */}
         <nav className="flex items-center space-x-2 text-sm text-gray-500 mb-8">
           <Link href="/" className="hover:text-gray-700">首页</Link>
@@ -440,7 +447,8 @@ export default function ComparisonDetailPage() {
             </Link>
           </div>
         )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

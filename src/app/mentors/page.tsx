@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Head from 'next/head';
 import { BookOpen, Star, Users, MessageSquare, Award } from 'lucide-react';
 import { Mentor, MentorScore } from '@/types/dataset';
 import { getMentorsWithScores, searchMentors, filterMentors } from '@/lib/data-loader';
@@ -132,8 +133,14 @@ export default function MentorsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <>
+      <Head>
+        <title>导师列表 - 大学导师选择分析平台</title>
+        <meta name="description" content="浏览和搜索优秀导师，找到最适合您的学术指导" />
+        <meta name="keywords" content="导师列表,学术指导,导师选择,研究方向" />
+      </Head>
+      <div className="min-h-screen bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* 页面标题 */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">导师列表</h1>
@@ -460,7 +467,8 @@ export default function MentorsPage() {
             <p className="text-gray-600">尝试调整搜索条件或筛选器</p>
           </div>
         )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
